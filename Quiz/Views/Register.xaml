@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Quiz.ViewModels;assembly=Quiz"
+             mc:Ignorable="d"
+             x:Class="Quiz.Register">
+
+    <ContentPage.BindingContext>
+        <viewModels:RegisterViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout Padding="0">
+        <Grid>
+            <StackLayout Padding="0" Margin="0">
+                <Frame BackgroundColor="#2C333A" HeightRequest="200" HorizontalOptions="FillAndExpand" AutomationProperties.IsInAccessibleTree="False" >
+                    <StackLayout>
+                        <Image Source="logo_transparent.png" Aspect="AspectFit" HeightRequest="200" Margin="0"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <StackLayout Margin="20,200,20,0">
+                <Frame CornerRadius="15" HasShadow="True" BackgroundColor="#FFFFFF" HeightRequest="400" HorizontalOptions="FillAndExpand">
+                    <StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand" Margin="10,30,10,20">
+                            <Label Text="Register" TextColor="#2C333A" FontSize="Large" FontAttributes="Bold" FontFamily="Roboto" CharacterSpacing="1"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand" WidthRequest="320" Margin="10">
+                            <Entry  x:Name="email" Text="{Binding Username}" Placeholder="Email"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand" WidthRequest="320" Margin="10">
+                            <Entry  x:Name="password" Text="{Binding Password}" Placeholder="Password" IsPassword="True"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="StartAndExpand" WidthRequest="320" Margin="10">
+                            <Entry x:Name="confirmPassword" Text="{Binding ConfirmPassword}" Placeholder="ConfirmPassword" IsPassword="True"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="CenterAndExpand"  Margin="0,5,0,0">
+                            <Label Text="Have already account?Login here" x:Name="lblLogin"  TextColor="#2C333A"/>
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="320" Margin="0,5,0,0">
+                            <Button Text="Register" BackgroundColor="#2C333A"  TextColor="#FFFFFF" CornerRadius="20" Command="{Binding RegisterCommand}"/>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+</ContentPage>

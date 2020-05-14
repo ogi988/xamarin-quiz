@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Quiz.ViewModels;
+using Quiz.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,9 +11,7 @@ namespace Quiz
         public App()
         {
             InitializeComponent();
-            var main = new MainPage();
-            MainPage = new NavigationPage(main);
-            NavigationPage.SetHasNavigationBar(main, false);
+            SetMainPage();
         }
 
         protected override void OnStart()
@@ -24,6 +24,14 @@ namespace Quiz
 
         protected override void OnResume()
         {
+        }
+        public void SetMainPage()
+        {
+           
+           MainPage  = new Register();
+
+           
+
         }
     }
 }
