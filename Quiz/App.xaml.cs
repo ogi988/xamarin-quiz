@@ -30,6 +30,7 @@ namespace Quiz
            
             var login = new Login();
             var register = new Register();
+            var dashboard = new Dashboard();
 
             if (!string.IsNullOrEmpty(Settings.Settings.AccessToken))
             {
@@ -38,8 +39,8 @@ namespace Quiz
                     var loginViewModel = new LoginViewModel();
                     loginViewModel.LoginCommand.Execute(null);
                 }
-                MainPage = new NavigationPage(login);
-                NavigationPage.SetHasNavigationBar(login, false);
+                MainPage = new NavigationPage(dashboard);
+                NavigationPage.SetHasNavigationBar(dashboard, false);
             }
             else if (!string.IsNullOrEmpty(Settings.Settings.Username)
                   && !string.IsNullOrEmpty(Settings.Settings.Password))
