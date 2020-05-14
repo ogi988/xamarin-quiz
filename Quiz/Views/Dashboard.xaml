@@ -16,7 +16,7 @@
                     <Label Text="Dashborad" TextColor="#F3F3F4" FontSize="Title" FontAttributes="Bold" FontFamily="Roboto" CharacterSpacing="1"/>
                 </StackLayout>
                 <StackLayout Padding="30,0,30,0" Margin="0,100,0,0">
-                    <Button BackgroundColor="#066BCC" Text="Start Quiz" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Clicked="startQuiz" />
+                    <Button BackgroundColor="#066BCC" Text="Start Quiz" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Command="{Binding StartQuizCommand }" />
                 </StackLayout>
                 <StackLayout Padding="30,0,30,0" Margin="0,20,0,0">
                     <Button BackgroundColor="#066BCC" Text="Leaderboard" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" />

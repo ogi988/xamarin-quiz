@@ -31,5 +31,15 @@ namespace Quiz.ViewModels
                 });
             }
         }
+        public ICommand StartQuizCommand
+        {
+            get
+            {
+                return new Command( () =>
+                {
+                    Application.Current.MainPage = new NavigationPage(new QuizQuestions());
+                });
+            }
+        }
     }
 }
