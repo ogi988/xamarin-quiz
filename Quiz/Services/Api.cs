@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-
+using Quiz.Settings;
 
 namespace Quiz.Services
 {
@@ -37,6 +37,37 @@ namespace Quiz.Services
         }
         
 
-        
+        public async Task<string> LoginAsync(string username, string password)
+        {
+            var keyValues = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("grant_type", "password")
+            };
+
+            var request = new HttpRequestMessage(
+                HttpMethod.Post, Constants.Api + "Token");
+
+            request.Content = new FormUrlEncodedContent(keyValues);
+
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+            var response = await client.SendAsync(request);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            JObject jwtDynamic = JsonConvert.DeserializeObject<dynamic>(content);
+
+            var accessTokenExpiration = jwtDynamic.Value<DateTime>(".expires");
+            var accessToken = jwtDynamic.Value<string>("access_token");
+
+            Settings.Settings.AccessTokenExpirationDate = accessTokenExpiration;
+
+
+            return accessToken;
+        }
     }
 }

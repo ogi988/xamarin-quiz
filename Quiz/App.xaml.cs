@@ -28,9 +28,30 @@ namespace Quiz
         public void SetMainPage()
         {
            
-           MainPage  = new Register();
+            var login = new Login();
+            var register = new Register();
 
-           
+            if (!string.IsNullOrEmpty(Settings.Settings.AccessToken))
+            {
+                if (Settings.Settings.AccessTokenExpirationDate < DateTime.UtcNow.AddHours(1))
+                {
+                    var loginViewModel = new LoginViewModel();
+                    loginViewModel.LoginCommand.Execute(null);
+                }
+                MainPage = new NavigationPage(login);
+                NavigationPage.SetHasNavigationBar(login, false);
+            }
+            else if (!string.IsNullOrEmpty(Settings.Settings.Username)
+                  && !string.IsNullOrEmpty(Settings.Settings.Password))
+            {
+                MainPage = new NavigationPage(login);
+                NavigationPage.SetHasNavigationBar(login, false);
+            }
+            else
+            {
+                MainPage = new NavigationPage(register);
+                NavigationPage.SetHasNavigationBar(register, false);
+            }
 
         }
     }

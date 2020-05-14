@@ -27,9 +27,11 @@ namespace Quiz.ViewModels
 
                     if (isRegistered)
                     {
-                        
+                        Settings.Settings.Username = Username;
+                        Settings.Settings.Password = Password;
                         await Application.Current.MainPage.DisplayAlert("Success", "Account registred", "Ok");
                     
+                        Application.Current.MainPage = new NavigationPage(new Login());
 
                     }
                     else

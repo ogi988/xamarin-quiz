@@ -1,20 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "jrmWJeZzCHEe6oEM0Z0z0ICqGyYA/sKAvGt7G5q7ZtRgmEJQALRr0NjUP7uEc3kEsh3UNGUEtOHgT1hxsCnC3A==",
+  "dgSpecHash": "oQXps7wuZHyiHUi92fDxJT9OpLK3RqA03Hm9+3a/N/T8gxAzzM2t2S049ot9EwORetUanAF+aupRs5SkdaXGHA==",
   "success": true,
-  "projectFilePath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\C# Xamarin Quiz\\Quiz\\Quiz\\Quiz.csproj",
+  "projectFilePath": "C:\\Users\\Bvid\\Desktop\\C#XAMARIN\\xamarin\\Quiz\\Quiz.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\ogbos\\.nuget\\packages\\microsoft.bcl\\1.1.10\\microsoft.bcl.1.1.10.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\microsoft.bcl.build\\1.0.14\\microsoft.bcl.build.1.0.14.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\microsoft.net.http\\2.2.29\\microsoft.net.http.2.2.29.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\xam.plugins.settings\\3.1.1\\xam.plugins.settings.3.1.1.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\microsoft.bcl\\1.1.10\\microsoft.bcl.1.1.10.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\microsoft.bcl.build\\1.0.14\\microsoft.bcl.build.1.0.14.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\microsoft.net.http\\2.2.29\\microsoft.net.http.2.2.29.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Bvid\\.nuget\\packages\\xam.plugins.settings\\3.1.1\\xam.plugins.settings.3.1.1.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
-    "C:\\Users\\ogbos\\.nuget\\packages\\xamarin.forms\\4.4.0.991864\\xamarin.forms.4.4.0.991864.nupkg.sha512"
+    "C:\\Users\\Bvid\\.nuget\\packages\\xamarin.forms\\4.4.0.991864\\xamarin.forms.4.4.0.991864.nupkg.sha512"
   ],
   "logs": [
     {
