@@ -214,6 +214,10 @@
     <Compile Include="Migrations\202005141425320_QuestionSeed.Designer.cs">
       <DependentUpon>202005141425320_QuestionSeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005161321546_dbSeed.cs" />
+    <Compile Include="Migrations\202005161321546_dbSeed.Designer.cs">
+      <DependentUpon>202005161321546_dbSeed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005141425320_QuestionSeed.resx">
       <DependentUpon>202005141425320_QuestionSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005161321546_dbSeed.resx">
+      <DependentUpon>202005161321546_dbSeed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

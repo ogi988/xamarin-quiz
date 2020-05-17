@@ -10,7 +10,7 @@ namespace Quiz.ViewModels
     public class LoginViewModel
     {
         private readonly Api _api = new Api();
-
+        QuizQuestionsViewModel QuizViewModel = new QuizQuestionsViewModel();
         public string Username { get; set; }
         public string Password { get; set; }
         public ICommand LoginCommand
@@ -22,6 +22,7 @@ namespace Quiz.ViewModels
                     var accesstoken = await _api.LoginAsync(Username, Password);
 
                     Settings.Settings.AccessToken = accesstoken;
+                    
                     Application.Current.MainPage = new NavigationPage(new Dashboard());
                 });
             }

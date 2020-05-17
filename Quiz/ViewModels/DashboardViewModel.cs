@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Quiz.ViewModels;
+using System.Threading.Tasks;
 
 namespace Quiz.ViewModels
 {
@@ -11,6 +13,7 @@ namespace Quiz.ViewModels
 
     class DashboardViewModel
     {
+        QuizQuestionsViewModel x = new QuizQuestionsViewModel();
        
         public ICommand ExitCommand
         {
@@ -25,6 +28,7 @@ namespace Quiz.ViewModels
                         Settings.Settings.Username = "";
                         Settings.Settings.Password = "";
                         Application.Current.MainPage = new NavigationPage(new Login());
+                        
                     }
                     
                     
@@ -35,8 +39,11 @@ namespace Quiz.ViewModels
         {
             get
             {
-                return new Command( () =>
+                return new Command(() =>
                 {
+                    //x.GetQuestionsCommand.Execute(null);
+                    //x.StartQuizCommand.Execute(null);
+                    
                     Application.Current.MainPage = new NavigationPage(new QuizQuestions());
                 });
             }

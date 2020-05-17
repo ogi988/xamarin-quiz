@@ -69,5 +69,17 @@ namespace Quiz.Services
 
             return accessToken;
         }
+        //public async Task<List<QuestionList>> GetQuestions()
+        //{
+        //    var request = new HttpRequestMessage(HttpMethod.Get, Constants.Api + "api/Questions");
+        //    HttpClientHandler clientHandler = new HttpClientHandler();
+        //    clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
+
+        //    HttpClient client = new HttpClient(clientHandler);
+        //    var response = await client.SendAsync(request);
+        //    var content = await response.Content.ReadAsStringAsync();
+        //    var questionLists = JsonConvert.DeserializeObject<List<QuestionList>>(content);
+        //    return questionLists;
+        //}
     }
 }

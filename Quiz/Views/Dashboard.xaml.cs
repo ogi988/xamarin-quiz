@@ -1,4 +1,5 @@
-﻿using Android.Provider;
+﻿using Android.OS;
+using Android.Provider;
 using Newtonsoft.Json;
 using Quiz.Models;
 using System;
@@ -22,22 +23,22 @@ namespace Quiz
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        //private async void startQuiz(object sender, EventArgs e)
-        //{
-        //    var request = new HttpRequestMessage(HttpMethod.Get, "https://10.0.2.2:44348/api/Questions");
-        //    HttpClientHandler clientHandler = new HttpClientHandler();
-        //    clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
+        private async void startQuiz(object sender, EventArgs e)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://10.0.2.2:44348/api/Questions");
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
 
-        //    HttpClient client = new HttpClient(clientHandler);
-        //    var response = await client.SendAsync(request);
-        //    var content = await response.Content.ReadAsStringAsync();
-        //    var ql = JsonConvert.DeserializeObject<QuestionList[]>(content);
-        //    Random rnd = new Random();
+            HttpClient client = new HttpClient(clientHandler);
+            var response = await client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+            var model = JsonConvert.DeserializeObject<List<QuestionList>>(content);
             
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        await DisplayAlert("Alert", "Kviz pocinje", "OK");
-        //    }
-        //}
+            Random rnd = new Random();
+            if (response.IsSuccessStatusCode)
+            {
+                await DisplayAlert("Alert", "Kviz pocinje", "OK");
+            }
+        }
     }
 }
