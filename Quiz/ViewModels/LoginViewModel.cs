@@ -20,6 +20,8 @@ namespace Quiz.ViewModels
                 return new Command(async () =>
                 {
                     var accesstoken = await _api.LoginAsync(Username, Password);
+                    Settings.Settings.Username = Username;
+
 
                     Settings.Settings.AccessToken = accesstoken;
                     

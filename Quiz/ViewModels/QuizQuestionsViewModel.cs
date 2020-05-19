@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +19,7 @@ namespace Quiz.ViewModels
 {
     class QuizQuestionsViewModel : INotifyPropertyChanged
     {
+        public string Username { get; set; }
         private readonly Api _api = new Api();
         public event PropertyChangedEventHandler PropertyChanged;
         private bool _startQuiz = false;
@@ -153,9 +155,25 @@ namespace Quiz.ViewModels
         
         public ICommand Check => new Command(async(btnText) =>
         {
+            Username = Settings.Settings.Username;
 
             if(QuestionNumber == 10)
             {
+                var model = new UserScore
+                {
+                    Username = Username,
+                    Score = Score
+                };
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
+                HttpClient client = new HttpClient(clientHandler);                
+                var json = JsonConvert.SerializeObject(model);
+                HttpContent httpContent = new StringContent(json);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                var response = await client.PostAsync(Constants.Api + "api/UserScores", httpContent);
+
                 await Application.Current.MainPage.DisplayAlert("Success", "Your score is:" + Score.ToString() +"/10", "Ok");
             }
             bool result = checkAnswer(btnText.ToString());

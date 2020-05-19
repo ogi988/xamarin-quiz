@@ -19,7 +19,7 @@
                     <Button BackgroundColor="#066BCC" Text="Start Quiz" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Command="{Binding StartQuizCommand }" Clicked="startQuiz" />
                 </StackLayout>
                 <StackLayout Padding="30,0,30,0" Margin="0,20,0,0">
-                    <Button BackgroundColor="#066BCC" Text="Leaderboard" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" />
+                    <Button BackgroundColor="#066BCC" Text="Leaderboard" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Clicked="GoToLeaderboard" />
                 </StackLayout>
                 <StackLayout Padding="30,250,30,0" Margin="0,20,0,0">
                     <Button BackgroundColor="#066BCC" Text="Exit" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Command="{Binding ExitCommand}" />

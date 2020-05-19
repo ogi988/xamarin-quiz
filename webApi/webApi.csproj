@@ -202,6 +202,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\UserScoresController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -218,11 +219,16 @@
     <Compile Include="Migrations\202005161321546_dbSeed.Designer.cs">
       <DependentUpon>202005161321546_dbSeed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005191216105_UserScore.cs" />
+    <Compile Include="Migrations\202005191216105_UserScore.Designer.cs">
+      <DependentUpon>202005191216105_UserScore.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\UserScore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -304,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005161321546_dbSeed.resx">
       <DependentUpon>202005161321546_dbSeed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005191216105_UserScore.resx">
+      <DependentUpon>202005191216105_UserScore.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

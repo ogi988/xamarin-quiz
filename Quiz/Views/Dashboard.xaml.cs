@@ -30,5 +30,9 @@ namespace Quiz
             Navigation.PushAsync(new QuizQuestions());
             
         }
+        private void GoToLeaderboard(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Leaderboard());
+        }
     }
 }
