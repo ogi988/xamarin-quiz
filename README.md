@@ -2,3 +2,4 @@
 - ASP.NET WebApi 
 - ASP.NET Identity
 - Xamarin
+- Entity Framework
