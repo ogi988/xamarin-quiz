@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Quiz.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,9 @@ namespace Quiz.Views
         public QuizQuestions()
         {
             InitializeComponent();
+            ((QuizQuestionsViewModel)BindingContext).Start();
             NavigationPage.SetHasNavigationBar(this, false);
         }
+        
     }
 }

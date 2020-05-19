@@ -2,6 +2,8 @@
 using Android.Provider;
 using Newtonsoft.Json;
 using Quiz.Models;
+using Quiz.ViewModels;
+using Quiz.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,22 +25,10 @@ namespace Quiz
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void startQuiz(object sender, EventArgs e)
+        private  void startQuiz(object sender, EventArgs e)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://10.0.2.2:44348/api/Questions");
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
-
-            HttpClient client = new HttpClient(clientHandler);
-            var response = await client.SendAsync(request);
-            var content = await response.Content.ReadAsStringAsync();
-            var model = JsonConvert.DeserializeObject<List<QuestionList>>(content);
+            Navigation.PushAsync(new QuizQuestions());
             
-            Random rnd = new Random();
-            if (response.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Alert", "Kviz pocinje", "OK");
-            }
         }
     }
 }

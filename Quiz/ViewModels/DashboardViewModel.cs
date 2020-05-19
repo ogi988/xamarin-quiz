@@ -13,8 +13,7 @@ namespace Quiz.ViewModels
 
     class DashboardViewModel
     {
-        QuizQuestionsViewModel x = new QuizQuestionsViewModel();
-       
+
         public ICommand ExitCommand
         {
             get
@@ -35,18 +34,7 @@ namespace Quiz.ViewModels
                 });
             }
         }
-        public ICommand StartQuizCommand
-        {
-            get
-            {
-                return new Command(() =>
-                {
-                    //x.GetQuestionsCommand.Execute(null);
-                    //x.StartQuizCommand.Execute(null);
-                    
-                    Application.Current.MainPage = new NavigationPage(new QuizQuestions());
-                });
-            }
-        }
+        
+        
     }
 }

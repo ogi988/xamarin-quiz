@@ -12,30 +12,32 @@
 
     <StackLayout BackgroundColor="#2c333a" Padding="0">
         <Grid>
-            <StackLayout Margin="20,30,20,0">
-                <Frame CornerRadius="15" HasShadow="True" BackgroundColor="#FFFFFF" HeightRequest="150" HorizontalOptions="FillAndExpand">
-                    <StackLayout>
-                        <Label Text="{Binding Question}"/>
-                        <Label Text="{Binding Score}"/>
+            
+            <StackLayout Margin="0,0,0,0">
+                <Frame Opacity="0.9" HasShadow="True" BackgroundColor="#066BCC" HeightRequest="30" HorizontalOptions="FillAndExpand">
+                    <StackLayout  Grid.Row="1" Orientation="Horizontal" Spacing="0">
+                        <Label Text="Time Left: " FontSize="Title" TextColor="White"></Label>
+                        
+                        <Label Text="{Binding Time}" FontSize="Title" TextColor="White"></Label>
                     </StackLayout>
                    
                 </Frame>
             </StackLayout>
-            <StackLayout Margin="20,330,20,0">
-                <StackLayout Margin="0,10,0,0">
-                    <Button Text="{Binding CorrectAnswer}" x:Name="button1"  BackgroundColor="#2CF43A"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button1}, Path=Text}" Command="{Binding Check}" />
-                </StackLayout>
-                <StackLayout Margin="0,10,0,0">
-                    <Button Text="{Binding Answer1}" x:Name="button2" BackgroundColor="#2CF43A"  TextColor="#FFFFFF" CornerRadius="20"  CommandParameter="{Binding Source={x:Reference button2}, Path=Text}"  Command="{Binding Check}" />
-                </StackLayout>
-                <StackLayout Margin="0,10,0,0">
-                    <Button Text="{Binding Answer2}" x:Name="button3" BackgroundColor="#2CF43A"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button3}, Path=Text}"  Command="{Binding Check}"/>
-                </StackLayout>
-                <StackLayout Margin="0,10,0,0">
-                    <Button Text="{Binding Answer3}" x:Name="button4"  BackgroundColor="#2CF43A"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button4}, Path=Text}"  Command="{Binding Check}" />
-                </StackLayout>
-                <StackLayout  Margin="0,20,0,0">
-                    <Button BackgroundColor="#066BCC" Text="Start" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Command="{Binding StartQuizCommand}" />
+            <StackLayout Margin="20,100,20,0">
+                <Label Text="{Binding Question}" TextColor="#FFFFFF" FontSize="Large" FontFamily="Roboto"/>
+                <StackLayout Margin="0,50,0,0">
+                    <StackLayout Margin="0,20,0,0">
+                        <Button Text="{Binding Answer1}" x:Name="button1" Opacity="0.9" BackgroundColor="#066BCC"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button1}, Path=Text}" Command="{Binding Check}" />
+                    </StackLayout>
+                    <StackLayout Margin="0,20,0,0">
+                        <Button Text="{Binding Answer2}" x:Name="button2" Opacity="0.9" BackgroundColor="#066BCC"  TextColor="#FFFFFF" CornerRadius="20"  CommandParameter="{Binding Source={x:Reference button2}, Path=Text}"  Command="{Binding Check}" />
+                    </StackLayout>
+                    <StackLayout Margin="0,20,0,0">
+                        <Button Text="{Binding Answer3}" x:Name="button3" Opacity="0.9" BackgroundColor="#066BCC"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button3}, Path=Text}"  Command="{Binding Check}"/>
+                    </StackLayout>
+                    <StackLayout Margin="0,20,0,0">
+                        <Button Text="{Binding Answer4}" x:Name="button4" Opacity="0.9" BackgroundColor="#066BCC"  TextColor="#FFFFFF" CornerRadius="20" CommandParameter="{Binding Source={x:Reference button4}, Path=Text}"  Command="{Binding Check}" />
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </Grid>
