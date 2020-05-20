@@ -155,7 +155,10 @@ namespace Quiz.ViewModels
 
                 var response = await client.PostAsync(Constants.Api + "api/UserScores", httpContent);
 
+                StopTimer();
                 await Application.Current.MainPage.DisplayAlert("Success", "Your score is:" + Score.ToString(), "Ok");
+                Application.Current.MainPage = new NavigationPage(new Dashboard());
+
             }
             bool result = checkAnswer(btnText.ToString());
             if (result)
@@ -253,6 +256,7 @@ namespace Quiz.ViewModels
                     {
                         StartTime = StartTime - TimeSpan.FromSeconds(1);
                         Time = StartTime.ToString();
+
                         return true;
                     }
                     else
