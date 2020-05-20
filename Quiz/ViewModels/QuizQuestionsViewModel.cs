@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -19,6 +20,8 @@ namespace Quiz.ViewModels
 {
     class QuizQuestionsViewModel : INotifyPropertyChanged
     {
+        public bool Stop { get; set; }
+        
         public string Username { get; set; }
         private readonly Api _api = new Api();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,6 +39,16 @@ namespace Quiz.ViewModels
             set
             {
                 _startQuiz = value;
+            }
+        }
+        private long _difficulty;
+        public long Difficulty
+        {
+            get { return _difficulty; }
+            set
+            {
+                _difficulty = value;
+                PropertyChanged(this, new PropertyChangedEventArgs(nameof(Difficulty)));
             }
         }
         private string _correctAnswer;
@@ -118,39 +131,7 @@ namespace Quiz.ViewModels
         public TimeSpan StartTime { get; set; }
 
         
-        public ICommand StartQuizCommand => new Command(async() =>
-        {
-            
-            bool getQuestions = await GetQuestions();
-            if (getQuestions)
-            {
-                var newQuestion = NewQuestion();
-                List<string> answers = new List<string>
-                {
-                    newQuestion.Answer1,
-                    newQuestion.Answer2,
-                    newQuestion.Answer3,
-                    newQuestion.CorrectAnswer
-                };
-
-                var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
-                CorrectAnswer = newQuestion.CorrectAnswer;
-
-                Answer1 = shuffled[0];
-                Answer2 = shuffled[1];
-                Answer3 = shuffled[2];
-                Answer4 = shuffled[3];
-                Question = newQuestion.Text;
-                
-                
-
-                StartQuiz = true;
-                
-            }
-       
-            
-            
-        });
+        
         
         
         public ICommand Check => new Command(async(btnText) =>
@@ -174,12 +155,13 @@ namespace Quiz.ViewModels
 
                 var response = await client.PostAsync(Constants.Api + "api/UserScores", httpContent);
 
-                await Application.Current.MainPage.DisplayAlert("Success", "Your score is:" + Score.ToString() +"/10", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Success", "Your score is:" + Score.ToString(), "Ok");
             }
             bool result = checkAnswer(btnText.ToString());
             if (result)
             {
-                Score = Score + 1;
+                
+                Score += Convert.ToInt32(Difficulty);
             }
             var newQuestion =  NewQuestion();
             List<string> answers = new List<string>();
@@ -239,7 +221,7 @@ namespace Quiz.ViewModels
         }
         public async void Start()
         {
-            StartTime = TimeSpan.FromSeconds(10);
+            StartTime = TimeSpan.FromSeconds(60);
             Time = StartTime.ToString();
             bool getQuestions = await GetQuestions();
             if (getQuestions)
@@ -259,17 +241,27 @@ namespace Quiz.ViewModels
                 Answer3 = shuffled[2];
                 Answer4 = shuffled[3];
                 Question = newQuestion.Text;
+                Difficulty = newQuestion.Difficulty;
+                Stop = false;
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
-                    if (StartTime.TotalSeconds > 0)
+                    if (Stop)
+                    {
+                        return false;
+                    }
+                    else if (StartTime.TotalSeconds > 0)
                     {
                         StartTime = StartTime - TimeSpan.FromSeconds(1);
                         Time = StartTime.ToString();
                         return true;
                     }
                     else
-                        Application.Current.MainPage.DisplayAlert("Time elapsed", "Your score is:" + Score.ToString() + "/10", "Ok");
+                    {
+                        Application.Current.MainPage.DisplayAlert("Time elapsed", "Your score is:" + Score.ToString(), "Ok");
+                        Application.Current.MainPage = new NavigationPage(new Dashboard());
                         return false;
+
+                    }
                 });
 
 
@@ -277,5 +269,10 @@ namespace Quiz.ViewModels
                 
             }
         }
+        public void StopTimer()
+        {
+            Stop = true;
+        }
+        
     }
 }

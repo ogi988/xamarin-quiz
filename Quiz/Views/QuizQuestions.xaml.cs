@@ -19,6 +19,12 @@ namespace Quiz.Views
             ((QuizQuestionsViewModel)BindingContext).Start();
             NavigationPage.SetHasNavigationBar(this, false);
         }
-        
+        protected override bool OnBackButtonPressed()
+        {
+            //return base.OnBackButtonPressed();
+            ((QuizQuestionsViewModel)BindingContext).StopTimer();
+            Application.Current.MainPage = new NavigationPage(new Dashboard());
+            return true;
+        }
     }
 }

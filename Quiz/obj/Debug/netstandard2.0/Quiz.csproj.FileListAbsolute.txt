@@ -82,3 +82,4 @@ C:\Users\Bvid\Desktop\Xamarin v9292.1\Quiz\obj\Debug\netstandard2.0\Quiz.dll
 C:\Users\Bvid\Desktop\Xamarin v9292.1\Quiz\obj\Debug\netstandard2.0\ref\Quiz.dll
 C:\Users\Bvid\Desktop\Xamarin v9292.1\Quiz\obj\Debug\netstandard2.0\Quiz.pdb
 C:\Users\Bvid\Desktop\Xamarin v9292.1\Quiz\obj\Debug\netstandard2.0\Views\Leaderboard.xaml.g.cs
+D:\Faks\6 semestar\Razvoj web aplikacija\New folder\C-Xamarin-Quiz\Quiz\obj\Debug\netstandard2.0\Views\Leaderboard.xaml.g.cs

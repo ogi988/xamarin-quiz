@@ -21,7 +21,7 @@ namespace Quiz.ViewModels
                 {
                     var accesstoken = await _api.LoginAsync(Username, Password);
                     Settings.Settings.Username = Username;
-
+                    Settings.Settings.Password = Password;
 
                     Settings.Settings.AccessToken = accesstoken;
                     
