@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Quiz.ViewModels;assembly=Quiz"
+             x:Class="Quiz.Views.EndQuiz">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#2C333A">
+
+            <StackLayout VerticalOptions="Center" Margin="0,20,0,0">
+                <Label  Text="Your Score is :"
+                TextColor="White"
+                FontSize="Large"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+
+                <Label Text=""      
+                TextColor="White"                       
+                FontSize="50"                 
+                x:Name="score"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+            <StackLayout VerticalOptions="End">
+
+                <StackLayout Padding="20,0,20,0 " Margin="0,330,0,0">
+                    <Button BackgroundColor="#066BCC" Text="Try Again!" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Clicked ="TryAgain" />
+                </StackLayout>
+                <StackLayout Padding="20,0,20,0 " Margin="0,20,0,0">
+                    <Button BackgroundColor="#066BCC" Text="Go back to Dashboard!" TextColor="#FFFFFF" BorderColor="#3DBFE3" CornerRadius="10" Clicked ="GoBackToDashboard" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,6 +6,6 @@ namespace Quiz
 {
     public class Constants
     {
-        public static string Api => "https://10.0.2.2:44349/";
+        public static string Api => "https://10.0.2.2:44348/";
     }
 }

@@ -21,7 +21,7 @@ namespace Quiz.ViewModels
     class QuizQuestionsViewModel : INotifyPropertyChanged
     {
         public bool Stop { get; set; }
-        
+        public List<UserScoreList> userScoreList { get; set; }
         public string Username { get; set; }
         private readonly Api _api = new Api();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -156,8 +156,7 @@ namespace Quiz.ViewModels
                 var response = await client.PostAsync(Constants.Api + "api/UserScores", httpContent);
 
                 StopTimer();
-                await Application.Current.MainPage.DisplayAlert("Success", "Your score is:" + Score.ToString(), "Ok");
-                Application.Current.MainPage = new NavigationPage(new Dashboard());
+                Application.Current.MainPage = new NavigationPage(new EndQuiz(Score));
 
             }
             bool result = checkAnswer(btnText.ToString());
@@ -216,8 +215,9 @@ namespace Quiz.ViewModels
             return true;
             
         }
-        public QuestionList NewQuestion()
+        public QuestionList NewQuestion(string QuestionDifficulty)
         {
+            
             Random rnd = new Random();
             int random = rnd.Next(1, questionList.Count);
             return questionList[random];
@@ -227,7 +227,9 @@ namespace Quiz.ViewModels
             StartTime = TimeSpan.FromSeconds(60);
             Time = StartTime.ToString();
             bool getQuestions = await GetQuestions();
-            if (getQuestions)
+            bool getScores = await GetUserScores();
+            int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
+            if (getQuestions && getScores)
             {
                 var newQuestion = NewQuestion();
                 List<string> answers = new List<string>();
@@ -261,8 +263,7 @@ namespace Quiz.ViewModels
                     }
                     else
                     {
-                        Application.Current.MainPage.DisplayAlert("Time elapsed", "Your score is:" + Score.ToString(), "Ok");
-                        Application.Current.MainPage = new NavigationPage(new Dashboard());
+                        Application.Current.MainPage = new NavigationPage(new EndQuiz(Score));
                         return false;
 
                     }
@@ -272,11 +273,30 @@ namespace Quiz.ViewModels
                 StartQuiz = true;
                 
             }
+
         }
+
         public void StopTimer()
         {
             Stop = true;
         }
-        
+        public async Task<bool> GetUserScores()
+        {
+
+            var request = new HttpRequestMessage(HttpMethod.Get, Constants.Api + "api/UserScores");
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
+
+            HttpClient client = new HttpClient(clientHandler);
+
+            var response = await client.SendAsync(request);
+            var content = await response.Content.ReadAsStringAsync();
+            userScoreList = JsonConvert.DeserializeObject<List<UserScoreList>>(content);
+
+
+            return true;
+
+        }
+
     }
 }
