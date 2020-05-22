@@ -97,6 +97,7 @@ namespace Quiz.ViewModels
         }
 
         public List<QuestionList> questionList { get; set; }
+        public List<int> RandomNums { get; set; }
 
         private string _answer3;
         public string Answer3
@@ -138,7 +139,7 @@ namespace Quiz.ViewModels
         {
             Username = Settings.Settings.Username;
 
-            if(QuestionNumber == 10)
+            if(QuestionNumber == 5)
             {
                 var model = new UserScore
                 {
@@ -215,22 +216,28 @@ namespace Quiz.ViewModels
             return true;
             
         }
-        public QuestionList NewQuestion(string QuestionDifficulty)
+        public QuestionList NewQuestion()
         {
             
             Random rnd = new Random();
-            int random = rnd.Next(1, questionList.Count);
-            return questionList[random];
+            int num;
+            do
+            {
+                num = rnd.Next(1, questionList.Count);
+            } while (RandomNums.Contains(num));
+            RandomNums.Add(num);
+            return questionList[num];
         }
         public async void Start()
         {
             StartTime = TimeSpan.FromSeconds(60);
             Time = StartTime.ToString();
+            RandomNums = new List<int>();
             bool getQuestions = await GetQuestions();
             bool getScores = await GetUserScores();
-            int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
             if (getQuestions && getScores)
             {
+                int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
                 var newQuestion = NewQuestion();
                 List<string> answers = new List<string>();
                 answers.Add(newQuestion.Answer1);
