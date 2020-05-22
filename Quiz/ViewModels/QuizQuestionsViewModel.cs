@@ -140,7 +140,7 @@ namespace Quiz.ViewModels
         {
             Username = Settings.Settings.Username;
 
-            if(QuestionNumber == 5)
+            if(QuestionNumber == 6)
             {
                 var model = new UserScore
                 {
@@ -161,29 +161,33 @@ namespace Quiz.ViewModels
                 Application.Current.MainPage = new NavigationPage(new EndQuiz(Score));
 
             }
-            bool result = checkAnswer(btnText.ToString());
-            if (result)
+            else
             {
-                
-                Score += Convert.ToInt32(Difficulty);
-            }
-            var newQuestion =  NewQuestion();
-            List<string> answers = new List<string>();
-            answers.Add(newQuestion.Answer1);
-            answers.Add(newQuestion.Answer2);
-            answers.Add(newQuestion.Answer3);
-            answers.Add(newQuestion.CorrectAnswer);
 
-            var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
-            CorrectAnswer = newQuestion.CorrectAnswer;
+                bool result = checkAnswer(btnText.ToString());
+                if (result)
+                {
+                
+                    Score += Convert.ToInt32(Difficulty);
+                }
+                var newQuestion =  NewQuestion();
+                List<string> answers = new List<string>();
+                answers.Add(newQuestion.Answer1);
+                answers.Add(newQuestion.Answer2);
+                answers.Add(newQuestion.Answer3);
+                answers.Add(newQuestion.CorrectAnswer);
+
+                var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
+                CorrectAnswer = newQuestion.CorrectAnswer;
             
-            Answer1 = shuffled[0];
-            Answer2 = shuffled[1];
-            Answer3 = shuffled[2];
-            Answer4 = shuffled[3];
-            Question = newQuestion.Text;
-            QuestionNumber++;
+                Answer1 = shuffled[0];
+                Answer2 = shuffled[1];
+                Answer3 = shuffled[2];
+                Answer4 = shuffled[3];
+                Question = newQuestion.Text;
+                QuestionNumber++;
             
+            }
             
             
             
@@ -216,33 +220,39 @@ namespace Quiz.ViewModels
             int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
             int sevenQuestions = maxNumber / 10;
             Random rnd = new Random();
-            for (int i = 0; i < 7; i++)
+            
+            for (int i = 0; i < 6; i++)
             {
-                int random = rnd.Next(sevenQuestions, sevenQuestions + 1);
-                FinalQuestionList.AddRange(from x in questionList where x.Difficulty == random select x);
+                int random = 5;
+                FinalQuestionList.AddRange((from x in questionList
+                                           where x.Difficulty == random                                           
+                                           select x).Take(1));
+                var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                long questionId = id;
+                questionList.RemoveAll(x => x.Id == questionId);
 
 
             }
-            for (int i = 0; i < 3; i++)
-            {
-                if (maxNumber > 80)
-                {
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    if (maxNumber > 80)
+            //    {
 
-                    int random = rnd.Next(8, 10);
-                    FinalQuestionList.AddRange(from x in questionList
-                                               where x.Difficulty == random
-                                               select x);
-                }
-                else
-                {
-                    int random = rnd.Next(sevenQuestions + 2, 10);
-                    FinalQuestionList.AddRange(from x in questionList
-                                               where x.Difficulty == random
-                                               select x);
-                }
+            //        int random = rnd.Next(8, 10);
+            //        FinalQuestionList.AddRange(from x in questionList
+            //                                   where x.Difficulty == random
+            //                                   select x);
+            //    }
+            //    else
+            //    {
+            //        int random = rnd.Next(sevenQuestions + 2, 10);
+            //        FinalQuestionList.AddRange(from x in questionList
+            //                                   where x.Difficulty == random
+            //                                   select x);
+            //    }
 
 
-            }
+            //}
             finalQuestionList = FinalQuestionList;
 
 
@@ -288,6 +298,7 @@ namespace Quiz.ViewModels
                 Answer4 = shuffled[3];
                 Question = newQuestion.Text;
                 Difficulty = newQuestion.Difficulty;
+                QuestionNumber++;
                 Stop = false;
                 Device.StartTimer(TimeSpan.FromSeconds(1), () =>
                 {
