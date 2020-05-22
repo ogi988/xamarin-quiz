@@ -22,6 +22,7 @@ namespace Quiz.ViewModels
     {
         public bool Stop { get; set; }
         public List<UserScoreList> userScoreList { get; set; }
+        public List<QuestionList> finalQuestionList { get; set; }
         public string Username { get; set; }
         private readonly Api _api = new Api();
         public event PropertyChangedEventHandler PropertyChanged;
@@ -210,9 +211,41 @@ namespace Quiz.ViewModels
             
             var response = await client.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
+            var FinalQuestionList = new List<QuestionList>();
             questionList = JsonConvert.DeserializeObject<List<QuestionList>>(content);
-           
-            
+            int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
+            int sevenQuestions = maxNumber / 10;
+            Random rnd = new Random();
+            for (int i = 0; i < 7; i++)
+            {
+                int random = rnd.Next(sevenQuestions, sevenQuestions + 1);
+                FinalQuestionList.AddRange(from x in questionList where x.Difficulty == random select x);
+
+
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                if (maxNumber > 80)
+                {
+
+                    int random = rnd.Next(8, 10);
+                    FinalQuestionList.AddRange(from x in questionList
+                                               where x.Difficulty == random
+                                               select x);
+                }
+                else
+                {
+                    int random = rnd.Next(sevenQuestions + 2, 10);
+                    FinalQuestionList.AddRange(from x in questionList
+                                               where x.Difficulty == random
+                                               select x);
+                }
+
+
+            }
+            finalQuestionList = FinalQuestionList;
+
+
             return true;
             
         }
@@ -223,21 +256,22 @@ namespace Quiz.ViewModels
             int num;
             do
             {
-                num = rnd.Next(1, questionList.Count);
+                num = rnd.Next(1, finalQuestionList.Count);
             } while (RandomNums.Contains(num));
             RandomNums.Add(num);
-            return questionList[num];
+            return finalQuestionList[num];
         }
         public async void Start()
         {
             StartTime = TimeSpan.FromSeconds(60);
             Time = StartTime.ToString();
             RandomNums = new List<int>();
-            bool getQuestions = await GetQuestions();
+            
             bool getScores = await GetUserScores();
+            bool getQuestions = await GetQuestions();
+            
             if (getQuestions && getScores)
             {
-                int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
                 var newQuestion = NewQuestion();
                 List<string> answers = new List<string>();
                 answers.Add(newQuestion.Answer1);
