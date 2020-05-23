@@ -26,22 +26,11 @@ namespace Quiz.ViewModels
         public string Username { get; set; }
         private readonly Api _api = new Api();
         public event PropertyChangedEventHandler PropertyChanged;
-        private bool _startQuiz = false;
-
         private int _score = 0;
         public int QuestionNumber { get; set; } = 0;
         public int Score { get { return _score; } set { _score = value; PropertyChanged(this, new PropertyChangedEventArgs(nameof(Score))); } }  
         
-        public bool StartQuiz {
-            get
-            {
-                return _startQuiz;
-            }
-            set
-            {
-                _startQuiz = value;
-            }
-        }
+        
         private long _difficulty;
         public long Difficulty
         {
@@ -140,25 +129,24 @@ namespace Quiz.ViewModels
         {
             Username = Settings.Settings.Username;
 
-            if(QuestionNumber == 6)
+            if(QuestionNumber == 1)
             {
-                var model = new UserScore
+                
+                bool result = checkAnswer(btnText.ToString());
+                if (result)
                 {
-                    Username = Username,
-                    Score = Score
-                };
-
-                HttpClientHandler clientHandler = new HttpClientHandler();
-                clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
-                HttpClient client = new HttpClient(clientHandler);                
-                var json = JsonConvert.SerializeObject(model);
-                HttpContent httpContent = new StringContent(json);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-                var response = await client.PostAsync(Constants.Api + "api/UserScores", httpContent);
-
-                StopTimer();
-                Application.Current.MainPage = new NavigationPage(new EndQuiz(Score));
+                    Score += Convert.ToInt32(Difficulty);
+                }
+                var insertUserScore = await _api.InsertUserScore(Username, Score);
+                if (insertUserScore)
+                {
+                    StopTimer();
+                    Application.Current.MainPage = new NavigationPage(new EndQuiz(Score));
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Something went wrong, try again", "Ok");
+                }
 
             }
             else
@@ -171,11 +159,13 @@ namespace Quiz.ViewModels
                     Score += Convert.ToInt32(Difficulty);
                 }
                 var newQuestion =  NewQuestion();
-                List<string> answers = new List<string>();
-                answers.Add(newQuestion.Answer1);
-                answers.Add(newQuestion.Answer2);
-                answers.Add(newQuestion.Answer3);
-                answers.Add(newQuestion.CorrectAnswer);
+                List<string> answers = new List<string>
+                {
+                    newQuestion.Answer1,
+                    newQuestion.Answer2,
+                    newQuestion.Answer3,
+                    newQuestion.CorrectAnswer
+                };
 
                 var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
                 CorrectAnswer = newQuestion.CorrectAnswer;
@@ -206,22 +196,17 @@ namespace Quiz.ViewModels
         }
         public async Task<bool> GetQuestions()
         {
-            
-            var request = new HttpRequestMessage(HttpMethod.Get, Constants.Api + "api/Questions");
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
 
-            HttpClient client = new HttpClient(clientHandler);
             
-            var response = await client.SendAsync(request);
-            var content = await response.Content.ReadAsStringAsync();
             var FinalQuestionList = new List<QuestionList>();
-            questionList = JsonConvert.DeserializeObject<List<QuestionList>>(content);
+            questionList = await _api.GetQuestions();
+            userScoreList = await _api.GetUserScores();
+           
             int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
             int sevenQuestions = maxNumber / 10;
             Random rnd = new Random();
             
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 2; i++)
             {
                 int random = 5;
                 FinalQuestionList.AddRange((from x in questionList
@@ -277,17 +262,19 @@ namespace Quiz.ViewModels
             Time = StartTime.ToString();
             RandomNums = new List<int>();
             
-            bool getScores = await GetUserScores();
+            
             bool getQuestions = await GetQuestions();
             
-            if (getQuestions && getScores)
+            if (getQuestions)
             {
                 var newQuestion = NewQuestion();
-                List<string> answers = new List<string>();
-                answers.Add(newQuestion.Answer1);
-                answers.Add(newQuestion.Answer2);
-                answers.Add(newQuestion.Answer3);
-                answers.Add(newQuestion.CorrectAnswer);
+                List<string> answers = new List<string>
+                {
+                    newQuestion.Answer1,
+                    newQuestion.Answer2,
+                    newQuestion.Answer3,
+                    newQuestion.CorrectAnswer
+                };
 
                 var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
                 CorrectAnswer = newQuestion.CorrectAnswer;
@@ -322,7 +309,6 @@ namespace Quiz.ViewModels
                 });
 
 
-                StartQuiz = true;
                 
             }
 
@@ -332,23 +318,7 @@ namespace Quiz.ViewModels
         {
             Stop = true;
         }
-        public async Task<bool> GetUserScores()
-        {
-
-            var request = new HttpRequestMessage(HttpMethod.Get, Constants.Api + "api/UserScores");
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
-
-            HttpClient client = new HttpClient(clientHandler);
-
-            var response = await client.SendAsync(request);
-            var content = await response.Content.ReadAsStringAsync();
-            userScoreList = JsonConvert.DeserializeObject<List<UserScoreList>>(content);
-
-
-            return true;
-
-        }
+        
 
     }
 }

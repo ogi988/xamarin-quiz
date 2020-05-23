@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz.Android\\Quiz.Android.csproj": {}
+    "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.Android\\Quiz.Android.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz.Android\\Quiz.Android.csproj": {
+    "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.Android\\Quiz.Android.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz.Android\\Quiz.Android.csproj",
+        "projectUniqueName": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.Android\\Quiz.Android.csproj",
         "projectName": "Quiz.Android",
-        "projectPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz.Android\\Quiz.Android.csproj",
-        "packagesPath": "C:\\Users\\Bvid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz.Android\\obj\\",
+        "projectPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.Android\\Quiz.Android.csproj",
+        "packagesPath": "C:\\Users\\ogbos\\.nuget\\packages\\",
+        "outputPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.Android\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Bvid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ogbos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -32,8 +32,8 @@
         "frameworks": {
           "monoandroid90": {
             "projectReferences": {
-              "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\Quiz.csproj": {
-                "projectPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\Quiz.csproj"
+              "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj": {
+                "projectPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj"
               }
             }
           }
@@ -58,20 +58,20 @@
         }
       }
     },
-    "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\Quiz.csproj": {
+    "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\Quiz.csproj",
+        "projectUniqueName": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj",
         "projectName": "Quiz",
-        "projectPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\Quiz.csproj",
-        "packagesPath": "C:\\Users\\Bvid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v9292.1\\Quiz\\obj\\",
+        "projectPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj",
+        "packagesPath": "C:\\Users\\ogbos\\.nuget\\packages\\",
+        "outputPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\Bvid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ogbos\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
