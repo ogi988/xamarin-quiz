@@ -223,6 +223,14 @@
     <Compile Include="Migrations\202005191216105_UserScore.Designer.cs">
       <DependentUpon>202005191216105_UserScore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202005231411294_AllQuestions.cs" />
+    <Compile Include="Migrations\202005231411294_AllQuestions.Designer.cs">
+      <DependentUpon>202005231411294_AllQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005231413340_AllQuestions1.cs" />
+    <Compile Include="Migrations\202005231413340_AllQuestions1.Designer.cs">
+      <DependentUpon>202005231413340_AllQuestions1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,6 +321,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202005191216105_UserScore.resx">
       <DependentUpon>202005191216105_UserScore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005231411294_AllQuestions.resx">
+      <DependentUpon>202005231411294_AllQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005231413340_AllQuestions1.resx">
+      <DependentUpon>202005231413340_AllQuestions1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

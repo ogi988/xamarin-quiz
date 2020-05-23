@@ -129,7 +129,7 @@ namespace Quiz.ViewModels
         {
             Username = Settings.Settings.Username;
 
-            if(QuestionNumber == 1)
+            if(QuestionNumber == 6)
             {
                 
                 bool result = checkAnswer(btnText.ToString());
@@ -206,7 +206,7 @@ namespace Quiz.ViewModels
             int sevenQuestions = maxNumber / 10;
             Random rnd = new Random();
             
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 6; i++)
             {
                 int random = 5;
                 FinalQuestionList.AddRange((from x in questionList
@@ -251,7 +251,7 @@ namespace Quiz.ViewModels
             int num;
             do
             {
-                num = rnd.Next(1, finalQuestionList.Count);
+                num = rnd.Next(0, finalQuestionList.Count);
             } while (RandomNums.Contains(num));
             RandomNums.Add(num);
             return finalQuestionList[num];
