@@ -252,6 +252,7 @@ namespace Quiz.ViewModels
 
                         } while (QuestionIds.Contains(questionId));
                         QuestionIds.Add(questionId);
+                        questionList.RemoveAll(x => x.Id == questionId);
                     }
                     else
                     {
@@ -268,6 +269,7 @@ namespace Quiz.ViewModels
 
                         } while (QuestionIds.Contains(questionId));
                         QuestionIds.Add(questionId);
+                        questionList.RemoveAll(x => x.Id == questionId);
                     }
 
 
