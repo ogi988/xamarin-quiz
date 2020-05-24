@@ -28,9 +28,9 @@ namespace Quiz.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         private int _score = 0;
         public int QuestionNumber { get; set; } = 0;
-        public int Score { get { return _score; } set { _score = value; PropertyChanged(this, new PropertyChangedEventArgs(nameof(Score))); } }  
-        
-        
+        public int Score { get { return _score; } set { _score = value; PropertyChanged(this, new PropertyChangedEventArgs(nameof(Score))); } }
+
+
         private long _difficulty;
         public long Difficulty
         {
@@ -88,6 +88,7 @@ namespace Quiz.ViewModels
 
         public List<QuestionList> questionList { get; set; }
         public List<int> RandomNums { get; set; }
+        public List<long> QuestionIds { get; set; }
 
         private string _answer3;
         public string Answer3
@@ -121,17 +122,17 @@ namespace Quiz.ViewModels
         }
         public TimeSpan StartTime { get; set; }
 
-        
-        
-        
-        
-        public ICommand Check => new Command(async(btnText) =>
+
+
+
+
+        public ICommand Check => new Command(async (btnText) =>
         {
             Username = Settings.Settings.Username;
 
-            if(QuestionNumber == 6)
+            if (QuestionNumber == 10)
             {
-                
+
                 bool result = checkAnswer(btnText.ToString());
                 if (result)
                 {
@@ -155,10 +156,10 @@ namespace Quiz.ViewModels
                 bool result = checkAnswer(btnText.ToString());
                 if (result)
                 {
-                
+
                     Score += Convert.ToInt32(Difficulty);
                 }
-                var newQuestion =  NewQuestion();
+                var newQuestion = NewQuestion();
                 List<string> answers = new List<string>
                 {
                     newQuestion.Answer1,
@@ -169,22 +170,22 @@ namespace Quiz.ViewModels
 
                 var shuffled = answers.OrderBy(x => Guid.NewGuid()).ToList();
                 CorrectAnswer = newQuestion.CorrectAnswer;
-            
+
                 Answer1 = shuffled[0];
                 Answer2 = shuffled[1];
                 Answer3 = shuffled[2];
                 Answer4 = shuffled[3];
                 Question = newQuestion.Text;
                 QuestionNumber++;
-            
+
             }
-            
-            
-            
-            
+
+
+
+
 
         });
-        
+
         public bool checkAnswer(string btnText)
         {
             if (btnText == CorrectAnswer)
@@ -197,56 +198,115 @@ namespace Quiz.ViewModels
         public async Task<bool> GetQuestions()
         {
 
-            
+
             var FinalQuestionList = new List<QuestionList>();
             questionList = await _api.GetQuestions();
             userScoreList = await _api.GetUserScores();
-           
-            int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
-            int sevenQuestions = maxNumber / 10;
-            Random rnd = new Random();
+            var haveScore = (from x in userScoreList where x.Username == Settings.Settings.Username select x).ToList();
             
-            for (int i = 0; i < 6; i++)
-            {
-                int random = 5;
-                FinalQuestionList.AddRange((from x in questionList
-                                           where x.Difficulty == random                                           
-                                           select x).Take(1));
-                var id = (from x in questionList where x.Difficulty == random select x.Id).First();
-                long questionId = id;
-                questionList.RemoveAll(x => x.Id == questionId);
+            Random rnd = new Random();
+            int random;
+            long questionId;
 
+            if (haveScore.Count() > 0)
+            {
+                int maxNumber = (from x in userScoreList where x.Username == Settings.Settings.Username select x.Score).Max();
+                int sevenQuestions = maxNumber / 10;
+                for (int i = 0; i < 7; i++)
+                {
+                    int difficulty = sevenQuestions + 2;
+                    do
+                    {
+
+                        random = rnd.Next(sevenQuestions, difficulty);
+                        var q = (from x in questionList
+                                 where x.Difficulty == random
+                                 select x).Take(1);
+                        var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                        questionId = id;
+                        FinalQuestionList.AddRange(q);
+
+                    } while (QuestionIds.Contains(questionId));
+                    QuestionIds.Add(questionId);
+                    //var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                    //questionId = id;
+                    questionList.RemoveAll(x => x.Id == questionId);
+
+
+                }
+                for (int i = 0; i < 3; i++)
+                {
+                    if (maxNumber > 80)
+                    {
+
+                        do
+                        {
+
+                            random = rnd.Next(8, 11);
+                            var q = (from x in questionList
+                                     where x.Difficulty == random
+                                     select x).Take(1);
+                            var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                            questionId = id;
+                            FinalQuestionList.AddRange(q);
+
+                        } while (QuestionIds.Contains(questionId));
+                        QuestionIds.Add(questionId);
+                    }
+                    else
+                    {
+                        do
+                        {
+
+                            random = rnd.Next(sevenQuestions + 2, 11);
+                            var q = (from x in questionList
+                                     where x.Difficulty == random
+                                     select x).Take(1);
+                            var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                            questionId = id;
+                            FinalQuestionList.AddRange(q);
+
+                        } while (QuestionIds.Contains(questionId));
+                        QuestionIds.Add(questionId);
+                    }
+
+
+                }
 
             }
-            //for (int i = 0; i < 3; i++)
-            //{
-            //    if (maxNumber > 80)
-            //    {
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    do
+                    {
 
-            //        int random = rnd.Next(8, 10);
-            //        FinalQuestionList.AddRange(from x in questionList
-            //                                   where x.Difficulty == random
-            //                                   select x);
-            //    }
-            //    else
-            //    {
-            //        int random = rnd.Next(sevenQuestions + 2, 10);
-            //        FinalQuestionList.AddRange(from x in questionList
-            //                                   where x.Difficulty == random
-            //                                   select x);
-            //    }
+                        random = rnd.Next(1, 5);
+                        var q = (from x in questionList
+                                 where x.Difficulty == random
+                                 select x).Take(1);
+                        var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                        questionId = id;
+                        FinalQuestionList.AddRange(q);
+
+                    } while (QuestionIds.Contains(questionId));
+                    QuestionIds.Add(questionId);
+                    //var id = (from x in questionList where x.Difficulty == random select x.Id).First();
+                    //questionId = id;
+                    questionList.RemoveAll(x => x.Id == questionId);
 
 
-            //}
+                }
+            }
             finalQuestionList = FinalQuestionList;
 
 
             return true;
-            
+
         }
         public QuestionList NewQuestion()
         {
-            
+
             Random rnd = new Random();
             int num;
             do
@@ -261,10 +321,11 @@ namespace Quiz.ViewModels
             StartTime = TimeSpan.FromSeconds(60);
             Time = StartTime.ToString();
             RandomNums = new List<int>();
-            
-            
+            QuestionIds = new List<long>();
+
+
             bool getQuestions = await GetQuestions();
-            
+
             if (getQuestions)
             {
                 var newQuestion = NewQuestion();
@@ -309,7 +370,7 @@ namespace Quiz.ViewModels
                 });
 
 
-                
+
             }
 
         }
@@ -318,7 +379,7 @@ namespace Quiz.ViewModels
         {
             Stop = true;
         }
-        
+
 
     }
 }
