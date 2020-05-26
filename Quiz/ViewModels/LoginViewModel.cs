@@ -20,12 +20,19 @@ namespace Quiz.ViewModels
                 return new Command(async () =>
                 {
                     var accesstoken = await _api.LoginAsync(Username, Password);
-                    Settings.Settings.Username = Username;
-                    Settings.Settings.Password = Password;
+                    if (accesstoken != null)
+                    {
+                        Settings.Settings.Username = Username;
+                        Settings.Settings.Password = Password;
 
-                    Settings.Settings.AccessToken = accesstoken;
-                    
-                    Application.Current.MainPage = new NavigationPage(new Dashboard());
+                        Settings.Settings.AccessToken = accesstoken;
+                        Application.Current.MainPage = new NavigationPage(new Dashboard());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Wrong username or password", "Ok");
+                    }
+
                 });
             }
         }
