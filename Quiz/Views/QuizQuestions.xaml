@@ -12,15 +12,20 @@
 
     <StackLayout BackgroundColor="#2c333a" Padding="0">
         <Grid>
-            
+
             <StackLayout Margin="0,0,0,0">
                 <Frame Opacity="0.9" HasShadow="True" BackgroundColor="#066BCC" HeightRequest="30" HorizontalOptions="FillAndExpand">
+
                     <StackLayout  Grid.Row="1" Orientation="Horizontal" Spacing="0">
                         <Label Text="Time Left: " FontSize="Title" TextColor="White"></Label>
-                        
+
                         <Label Text="{Binding Time}" FontSize="Title" TextColor="White"></Label>
+                        <Label Text="Score: " FontSize="Title" TextColor="White" Margin="60,0,0,0"></Label>
+
+                        <Label Text="{Binding Score}" FontSize="Title" TextColor="White"></Label>
                     </StackLayout>
-                   
+
+
                 </Frame>
             </StackLayout>
             <StackLayout Margin="20,100,20,0">

@@ -176,6 +176,7 @@ namespace Quiz.ViewModels
                 Answer3 = shuffled[2];
                 Answer4 = shuffled[3];
                 Question = newQuestion.Text;
+                Difficulty = newQuestion.Difficulty;
                 QuestionNumber++;
 
             }

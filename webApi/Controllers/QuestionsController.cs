@@ -24,7 +24,7 @@ namespace webApi.Controllers
             _context.Dispose();
         }
 
-        
+        [Authorize]
         public IEnumerable<Question> GetQuestions()
         {
             return _context.Questions.ToList();

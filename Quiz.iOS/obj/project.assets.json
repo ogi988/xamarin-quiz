@@ -1633,24 +1633,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bvid\\.nuget\\packages\\": {},
+    "C:\\Users\\ogbos\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bvid\\Desktop\\Xamarin v2\\Quiz.iOS\\Quiz.iOS.csproj",
+      "projectUniqueName": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.iOS\\Quiz.iOS.csproj",
       "projectName": "Quiz.iOS",
-      "projectPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v2\\Quiz.iOS\\Quiz.iOS.csproj",
-      "packagesPath": "C:\\Users\\Bvid\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v2\\Quiz.iOS\\obj\\",
+      "projectPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.iOS\\Quiz.iOS.csproj",
+      "packagesPath": "C:\\Users\\ogbos\\.nuget\\packages\\",
+      "outputPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bvid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ogbos\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -1664,8 +1664,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\Bvid\\Desktop\\Xamarin v2\\Quiz\\Quiz.csproj": {
-              "projectPath": "C:\\Users\\Bvid\\Desktop\\Xamarin v2\\Quiz\\Quiz.csproj"
+            "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj": {
+              "projectPath": "D:\\Faks\\6 semestar\\Razvoj web aplikacija\\New folder\\C-Xamarin-Quiz\\Quiz\\Quiz.csproj"
             }
           }
         }

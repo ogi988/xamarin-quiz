@@ -20,12 +20,13 @@ namespace webApi.Controllers
             _context.Dispose();
         }
 
-
+        [Authorize]
         public IEnumerable<UserScore> GetUserScores()
         {
             return _context.UserScores.ToList();
         }
 
+        [Authorize]
         [HttpPost]
         public IHttpActionResult CreateCustomer(UserScore userScore)
         {

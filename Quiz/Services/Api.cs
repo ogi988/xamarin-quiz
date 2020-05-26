@@ -76,6 +76,7 @@ namespace Quiz.Services
             clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
 
             HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.Settings.AccessToken);
             var response = await client.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
             var questionLists = JsonConvert.DeserializeObject<List<QuestionList>>(content);
@@ -91,6 +92,7 @@ namespace Quiz.Services
             HttpClientHandler clientHandler = new HttpClientHandler();
             clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
             HttpClient client = new HttpClient(clientHandler);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.Settings.AccessToken);
             var json = JsonConvert.SerializeObject(model);
             HttpContent httpContent = new StringContent(json);
             httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -106,7 +108,7 @@ namespace Quiz.Services
             clientHandler.ServerCertificateCustomValidationCallback = (senders, cert, chain, sslPolicyErrors) => { return true; };
 
             HttpClient client = new HttpClient(clientHandler);
-
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.Settings.AccessToken);
             var response = await client.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
             var userScoreList = JsonConvert.DeserializeObject<List<UserScoreList>>(content);
